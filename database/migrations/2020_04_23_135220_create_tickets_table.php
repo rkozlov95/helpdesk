@@ -15,6 +15,11 @@ class CreateTicketsTable extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id')->unsigned();
+            $table->string('ticket_id')->unique();
+            $table->string('subject');
+            $table->text('message');
+            $table->string('status');
             $table->timestamps();
         });
     }
