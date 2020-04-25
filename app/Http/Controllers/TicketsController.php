@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Ticket;
 use App\User;
 use Carbon\Carbon;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -54,9 +53,9 @@ class TicketsController extends Controller
 
         $prevTicket = Ticket::whereDate('created_at', Carbon::today())->where('user_id', $user_id)->get()->toArray();
 
-    	if ($prevTicket) {
-		    return redirect('/tickets')->with('warning', 'Ticket can be created only once a day');
-		}
+        if ($prevTicket) {
+            return redirect('/tickets')->with('warning', 'Ticket can be created only once a day');
+        }
 
         $ticket->save();
 
