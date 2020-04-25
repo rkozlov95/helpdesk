@@ -40,7 +40,7 @@ class TicketsController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, ['subject' => 'required', 'message' => 'required']);
+        $this->validate($request, ['subject' => 'required', 'message' => 'required', 'file' => 'required']);
         $request->file('file')->store('uploads', 'public');
         $path = $request->file('file')->hashName();
         $user_id = Auth::user()->id;

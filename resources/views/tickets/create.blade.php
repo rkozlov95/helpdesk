@@ -3,20 +3,20 @@
 @section('title', 'Open Ticket')
 
 @section('content')
+
+  @if ($errors->any())
+    <ul class="list-group mb-2">
+      @foreach ($errors->all() as $error)
+        <li class="list-group-item list-group-item-danger">{{ $error }}</li>
+      @endforeach
+    </ul>
+  @endif
+
   <div class="card">
     <div class="card-header">
       Open new ticket
     </div>
     <div class="card-body">
-	  @if ($errors->any())
-        <div class="alert alert-danger">
-          <ul>
-            @foreach ($errors->all() as $error)
-              <li>{{ $error }}</li>
-            @endforeach
-          </ul>
-        </div>
-      @endif
       <form method="post" enctype="multipart/form-data" action="{{ route('tickets.store') }}">
 		@csrf
         <div class="form-group">

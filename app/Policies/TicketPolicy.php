@@ -22,9 +22,6 @@ class TicketPolicy
 
     public function index(User $user, Ticket $ticket)
     {
-        if ($user->email === 'manager@mail.ru') {
-            return true;
-        }
-        return $user->id === $ticket->user_id;
+        return $user->isManager() || $user->id === $ticket->user_id;
     }
 }

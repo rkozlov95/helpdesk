@@ -43,6 +43,7 @@
 
                     @endif
 
+                    @if($ticket->status !== "Closed")
                     <div class="comment-form">
                         <form method="POST" class="form">
                             {!! csrf_field() !!}
@@ -68,7 +69,8 @@
                                 </button>
                             </div>
                         </form>
-                </div>
+                   </div>
+                   @endif
             </div>
         </div>
     </div>

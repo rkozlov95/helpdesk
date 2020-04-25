@@ -16,9 +16,9 @@ class CommentsController extends Controller
             'comment'   => 'required'
         ]);
 
-        $comment = Comment::create([
+        $comment = comment::create([
             'ticket_id' => $request->input('ticket_id'),
-            'user_id'    => Auth::user()->id,
+            'user_id'    => auth::user()->id,
             'comment'    => $request->input('comment'),
         ]);
 
