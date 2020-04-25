@@ -11,6 +11,7 @@
                 </div>
                 <div class="card-body">
                     <div class="ticket-info">
+                        <p>Creator E-Mail: {{ $ticket->user->email }}</p>
                         <p>Message: {{ $ticket->message }}</p>
                         @if ($ticket->status === 'Open')
                             Status: <span class="badge badge-success">{{ $ticket->status }}</span>
@@ -24,23 +25,23 @@
 
                     <hr>
 
+                    @if(!$comments->isEmpty())
                     <div class="comments">
                         <p>Comments:</p>
                         @foreach ($comments as $comment)
-                            <div class="panel panel-@if($ticket->user->id === $comment->user_id) {{"default"}}@else{{"success"}}@endif">
                             <div class="panel panel-heading">
                                 {{ $comment->user->name }}
                                 <span class="pull-right">{{ $comment->created_at->diffForHumans() }}</span>
                             </div>
-
                             <div class="panel panel-body">
                                 {{ $comment->comment }}
-                            </div>
                             </div>
                         @endforeach
                     </div>
 
                     <hr>
+
+                    @endif
 
                     <div class="comment-form">
                         <form action="{{ url('comment') }}" method="POST" class="form">
@@ -49,7 +50,7 @@
                             <input type="hidden" name="ticket_id" value="{{ $ticket->id }}">
 
                             <div class="form-group{{ $errors->has('comment') ? ' has-error' : '' }}">
-                                <textarea rows="10" id="comment" class="form-control" name="comment"></textarea>
+                                <textarea rows="7" class="form-control" name="comment"></textarea>
 
                                 @if ($errors->has('comment'))
                                     <span class="help-block">
