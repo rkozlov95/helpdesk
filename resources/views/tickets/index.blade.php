@@ -34,7 +34,7 @@
             <td><a href="{{ route('tickets.show', $ticket->id) }}">{{$ticket->id}}</a></td>
             <td>{{$ticket->user_id}}</td>
             <td>{{$ticket->subject}}</td>
-            <td>{{$ticket->message}}</td>
+            <td>{!! Str::limit($ticket->message, 70) !!}</td>
             <td>
 				@if ($ticket->status === 'Open')
                 	<span class="badge badge-success">{{ $ticket->status }}</span>
