@@ -28,4 +28,3 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('tickets', 'TicketsController');
 
 Route::post('comment', 'CommentsController@postComment');
-
