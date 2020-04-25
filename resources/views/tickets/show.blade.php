@@ -21,10 +21,31 @@
 						<p>Attachment - <a href="{{ asset('/storage/uploads/' . $ticket->path) }}">{{ $ticket->path }}</a>
                         <p>Created on: {{ $ticket->created_at->diffForHumans() }}</p>
                     </div>
+
+                    <hr>
+
+                    <div class="comments">
+                        <p>Comments:</p>
+                        @foreach ($comments as $comment)
+                            <div class="panel panel-@if($ticket->user->id === $comment->user_id) {{"default"}}@else{{"success"}}@endif">
+                            <div class="panel panel-heading">
+                                {{ $comment->user->name }}
+                                <span class="pull-right">{{ $comment->created_at->diffForHumans() }}</span>
+                            </div>
+
+                            <div class="panel panel-body">
+                                {{ $comment->comment }}
+                            </div>
+                            </div>
+                        @endforeach
+                    </div>
+
+                    <hr>
+
                     <div class="comment-form">
                         <form action="{{ url('comment') }}" method="POST" class="form">
                             {!! csrf_field() !!}
-
+                            <p>New comment:</p>
                             <input type="hidden" name="ticket_id" value="{{ $ticket->id }}">
 
                             <div class="form-group{{ $errors->has('comment') ? ' has-error' : '' }}">

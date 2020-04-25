@@ -71,7 +71,9 @@ class TicketsController extends Controller
     public function show($id)
     {
         $ticket = Ticket::where('id', $id)->firstOrFail();
-        return view('tickets.show', compact('ticket'));
+        $comments = $ticket->comments;
+
+        return view('tickets.show', compact('ticket', 'comments'));
     }
 
     /**
