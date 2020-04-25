@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Ticket;
 use App\User;
+use App\Comment;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -108,5 +109,24 @@ class TicketsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function close($id)
+    {
+        $ticket = Ticket::where('id', $id)->firstOrFail();
+
+        $ticket->status = 'Closed';
+
+        $ticket->save();
+
+        $userName = Auth::user()->name;
+
+        $comment = comment::create([
+            'ticket_id' => $id,
+            'user_id'    => auth::user()->id,
+            'comment'    => "The ticket has been closed",
+        ]);
+
+        return redirect()->back();
     }
 }

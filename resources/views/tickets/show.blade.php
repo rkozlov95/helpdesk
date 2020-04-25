@@ -44,7 +44,7 @@
                     @endif
 
                     <div class="comment-form">
-                        <form action="{{ url('comment') }}" method="POST" class="form">
+                        <form method="POST" class="form">
                             {!! csrf_field() !!}
                             <p>New comment:</p>
                             <input type="hidden" name="ticket_id" value="{{ $ticket->id }}">
@@ -60,7 +60,12 @@
                             </div>
 
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Comment</button>
+                                <button formaction="{{ url('comment') }}" class="btn btn-primary">
+                                    Comment
+                                </button>
+                                <button formaction="{{ url('close/' . $ticket->id) }}" class="btn btn-danger float-right">
+                                    Close ticket
+                                </button>
                             </div>
                         </form>
                 </div>
