@@ -12,16 +12,16 @@ class OrderShipped extends Mailable
     use Queueable;
     use SerializesModels;
 
-    public $details;
+    public $ticket;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($details)
+    public function __construct($ticket)
     {
-        $this->details = $details;
+        $this->ticket = $ticket;
     }
 
     /**
@@ -31,7 +31,7 @@ class OrderShipped extends Mailable
      */
     public function build()
     {
-        return $this->subject('Mail from Helpdesk system')
-            ->view('tickets.create');
+        return $this->subject('Created new ticket')
+            ->view('mail.ticket_info');
     }
 }

@@ -4,7 +4,7 @@
 
 ### Requirements
 
-  * PHP ^7.4
+  * PHP ^7.2.5
   * Composer
   * Node.js & npm
   * MySQL for local

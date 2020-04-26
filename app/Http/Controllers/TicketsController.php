@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Ticket;
 use App\User;
 use App\Comment;
+use App\Mail\OrderShipped;
+use Mail;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -57,6 +59,8 @@ class TicketsController extends Controller
         if ($prevTicket) {
             return redirect('/tickets')->with('warning', 'Ticket can be created only once a day');
         }
+
+        Mail::to('rkozlov340@gmail.com')->send(new OrderShipped($ticket));
 
         $ticket->save();
 

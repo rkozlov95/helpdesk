@@ -83,8 +83,8 @@ return [
     */
 
     'from' => [
-        'address' => 'rkozlov340@gmail.com',
-        'name' => 'Helpdesk system',
+        'address' => 'managermanager005@gmail.com',
+        'name' => 'Manager',
     ],
 
     /*

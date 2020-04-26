@@ -14,8 +14,10 @@
     <body>
         <div class="card text-center mx-auto card-center" style="width: 18rem;">
             @if (Route::has('login'))
+                <div class="card-header">
+                    Select action
+                </div>
                 <div class="card-body">
-                    <h5 class="card-title">Select action</h5>
                     @auth
                         <a href="{{ url('/home') }}" class="btn btn-primary">Home</a>
                     @else
