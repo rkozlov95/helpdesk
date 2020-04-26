@@ -10,6 +10,7 @@ use Mail;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Grosv\LaravelPasswordlessLogin\LoginUrl;
 
 class TicketsController extends Controller
 {
@@ -60,9 +61,16 @@ class TicketsController extends Controller
             return redirect('/tickets')->with('warning', 'Ticket can be created only once a day');
         }
 
-        Mail::to('rkozlov340@gmail.com')->send(new OrderShipped($ticket));
+        $managerEmail = env('MAIL_USERNAME');
 
         $ticket->save();
+
+        $user = User::find(1);
+        $generator = new LoginUrl($user);
+        $generator->setRedirectUrl('/tickets/' . $ticket->id);
+        $url = $generator->generate();
+
+        Mail::to($managerEmail)->send(new OrderShipped($ticket, $url));
 
         return redirect('/tickets')->with('success', 'Ticket has been added');
     }
@@ -123,6 +131,13 @@ class TicketsController extends Controller
 
         $ticket->save();
 
+        $manager = User::find(1);
+
+        // prepare magic link
+        $generator = new LoginUrl($manager);
+        $generator->setRedirectUrl('/tickets/' . $ticket->id);
+        $url = $generator->generate();
+
         $userName = Auth::user()->name;
 
         $comment = comment::create([
@@ -130,6 +145,10 @@ class TicketsController extends Controller
             'user_id'    => auth::user()->id,
             'comment'    => "The ticket has been closed",
         ]);
+
+        $managerEmail = env("MAIL_USERNAME");
+
+        Mail::to($managerEmail)->send(new OrderShipped($ticket, $url));
 
         return redirect()->back();
     }

@@ -13,15 +13,17 @@ class OrderShipped extends Mailable
     use SerializesModels;
 
     public $ticket;
+    public $url;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($ticket)
+    public function __construct($ticket, $url)
     {
         $this->ticket = $ticket;
+        $this->url = $url;
     }
 
     /**
@@ -31,7 +33,7 @@ class OrderShipped extends Mailable
      */
     public function build()
     {
-        return $this->subject('Created new ticket')
+        return $this->subject('Ticket INFO')
             ->view('mail.ticket_info');
     }
 }

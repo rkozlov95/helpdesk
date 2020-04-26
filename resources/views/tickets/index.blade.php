@@ -13,7 +13,9 @@
       {{ session()->get('warning') }}
     </div>
   @endif
-  <table class="table table-striped">
+
+  @auth
+  <table class="table table-hover">
     <thead>
         <tr>
           <td>Ticket ID</td>
@@ -43,5 +45,6 @@
         @endforeach
     </tbody>
   </table>
+  @endauth
 <div>
 @endsection

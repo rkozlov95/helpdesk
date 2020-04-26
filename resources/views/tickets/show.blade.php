@@ -3,6 +3,7 @@
 @section('subject', $ticket->subject)
 
 @section('content')
+    @auth
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -74,4 +75,5 @@
             </div>
         </div>
     </div>
+    @endauth
 @endsection

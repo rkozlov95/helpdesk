@@ -12,6 +12,7 @@
     </ul>
   @endif
 
+  @auth
   <div class="card">
     <div class="card-header">
       Open new ticket
@@ -35,4 +36,5 @@
   	  </form>
     </div>
   </div>
+  @endauth
 @endsection

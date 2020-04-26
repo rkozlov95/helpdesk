@@ -8,5 +8,6 @@
     <p>Title: {{ $ticket->subject }}</p>
     <p>Message: {{ $ticket->message }}</p>
     <p>Status: {{ $ticket->status }}</p>
+    <p>View details: {{ $url }}</p>
 </body>
 </html>
