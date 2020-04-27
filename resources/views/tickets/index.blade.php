@@ -15,7 +15,7 @@
   @endif
 
   @auth
-  <table class="table table-hover">
+  <table id="table" class="table table-hover">
     <thead>
         <tr>
           <td>Ticket ID</td>
@@ -23,6 +23,7 @@
           <td>Subject</td>
           <td>Message</td>
           <td>Status</td>
+          <td>There is a manager</td>
         </tr>
     </thead>
     <tbody>
@@ -40,6 +41,13 @@
                     <span class="badge badge-danger">{{ $ticket->status }}</span>
                 @endif
 			</td>
+            <td>
+                @if ($ticket->manager_id)
+                    <span class="badge badge-success">Yes</span>
+                @else
+                    <span class="badge badge-danger">No</span>
+                @endif
+            </td>
         </tr>
 		@endcan
         @endforeach

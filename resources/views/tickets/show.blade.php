@@ -6,9 +6,27 @@
     @auth
     <div class="row">
         <div class="col-12">
+            @if(session()->get('success'))
+                <div class="alert alert-success">
+                {{ session()->get('success') }}
+                </div>
+            @endif
+
             <div class="card">
                 <div class="card-header">
-                    #{{ $ticket->id }} - {{ $ticket->subject }}
+                    <form id="accept_form" method="POST" action="{{ url('accept_ticket/' . $ticket->id)}}">
+                        <div class="float-left">#{{ $ticket->id }} - {{ $ticket->subject }}</div>
+                        {!! csrf_field() !!}
+                        @if($ticket->manager_id)
+                            <div class="float-right"> Manager: {{ $nameManager }} </div>
+                        @else
+                            @can('accept', $ticket)
+                                <a onclick="document.getElementById('accept_form').submit();" class="float-right" role="submit" href="#">
+                                Accept ticket
+                                </a>
+                            @endcan
+                        @endif
+                    </form>
                 </div>
                 <div class="card-body">
                     <div class="ticket-info">

@@ -20,6 +20,7 @@ class CreateTicketsTable extends Migration
             $table->text('message');
             $table->string('status');
             $table->text('path');
+            $table->integer('manager_id')->nullable();
             $table->timestamps();
         });
     }

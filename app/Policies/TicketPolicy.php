@@ -24,4 +24,9 @@ class TicketPolicy
     {
         return $user->isManager() || $user->id === $ticket->user_id;
     }
+
+    public function accept(User $user)
+    {
+        return $user->isManager();
+    }
 }

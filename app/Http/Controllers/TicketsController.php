@@ -85,8 +85,9 @@ class TicketsController extends Controller
     {
         $ticket = Ticket::where('id', $id)->firstOrFail();
         $comments = $ticket->comments;
+        $nameManager = User::find($ticket->manager_id)->name ?? null;
 
-        return view('tickets.show', compact('ticket', 'comments'));
+        return view('tickets.show', compact('ticket', 'comments', 'nameManager'));
     }
 
     /**
@@ -151,5 +152,16 @@ class TicketsController extends Controller
         Mail::to($managerEmail)->send(new OrderShipped($ticket, $url));
 
         return redirect()->back();
+    }
+
+    public function acceptTicket($id)
+    {
+        $ticket = Ticket::where('id', $id)->firstOrFail();
+
+        $ticket->manager_id = Auth::user()->id;
+
+        $ticket->save();
+
+        return redirect()->back()->with('success', 'Ticket successfully accepted for execution');
     }
 }
