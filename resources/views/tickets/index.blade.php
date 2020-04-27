@@ -24,6 +24,7 @@
           <td>Message</td>
           <td>Status</td>
           <td>There is a manager</td>
+          <td>Has manager comments</td>
         </tr>
     </thead>
     <tbody>
@@ -43,6 +44,13 @@
 			</td>
             <td>
                 @if ($ticket->manager_id)
+                    <span class="badge badge-success">Yes</span>
+                @else
+                    <span class="badge badge-danger">No</span>
+                @endif
+            </td>
+            <td>
+                @if ($ticket->hasManagerComments())
                     <span class="badge badge-success">Yes</span>
                 @else
                     <span class="badge badge-danger">No</span>

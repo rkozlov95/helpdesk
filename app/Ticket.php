@@ -19,4 +19,12 @@ class Ticket extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function hasManagerComments()
+    {
+        return $this->comments->reduce(function ($acc, $item) {
+            $isManagerComment = User::all()->find($item->user_id)->isManager();
+            return $isManagerComment || $acc;
+        }, false);
+    }
 }

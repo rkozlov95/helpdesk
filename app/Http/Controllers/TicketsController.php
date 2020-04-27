@@ -72,7 +72,7 @@ class TicketsController extends Controller
 
         Mail::to($managerEmail)->send(new OrderShipped($ticket, $url));
 
-        return redirect('/tickets')->with('success', 'Ticket has been added');
+        return redirect('/tickets')->with('success', 'Ticket has been added!');
     }
 
     /**
@@ -151,7 +151,7 @@ class TicketsController extends Controller
 
         Mail::to($managerEmail)->send(new OrderShipped($ticket, $url));
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Ticket successfully closed!');
     }
 
     public function acceptTicket($id)
@@ -162,6 +162,6 @@ class TicketsController extends Controller
 
         $ticket->save();
 
-        return redirect()->back()->with('success', 'Ticket successfully accepted for execution');
+        return redirect()->back()->with('success', 'Ticket successfully accepted for execution!');
     }
 }
