@@ -47,10 +47,16 @@ MAIL_PASSWORD=your_password
 $ php artisan migrate
 ```
 
-### Create manager
+### Create manager acc
 
 ```sh
 $ php artisan db:seed
+```
+#### Login details
+
+```sh
+E-mail: manager@mail.com
+Password: 12345678
 ```
 
 ### Setup
